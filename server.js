@@ -14,6 +14,7 @@ const cookieSession = require('cookie-session')
 const passwordAuth = require("./routes/api/v1/auth/passwordAuth");
 // Addition
 const addEmployee = require("./routes/api/v1/auth/addEmployee");
+const enquiry = require("./routes/api/v1/public/enquiry");
 
 
 //passport 
@@ -47,8 +48,8 @@ mongoose
   .then(() => console.log(" MongoDB connected successfully"))
   .catch(err => console.log(err));
 
-  //import models
-  require("./models/User")
+  //import Models
+  require("./Models/User")
 
 //Passport middleware
 app.use(passport.initialize());
@@ -62,6 +63,7 @@ require('./services/passport')
 app.use("/api/v1/auth/passwordAuth", passwordAuth);
 // Addition
 app.use("/api/v1/auth/addEmployee", addEmployee);
+app.use("/api/v1/public/enquiry", enquiry);
 
 
 

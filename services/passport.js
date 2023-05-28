@@ -3,7 +3,7 @@
 // const keys = require('../setup/myurl');
 // const mongoose = require('mongoose')
 // const jsonwt = require("jsonwebtoken");
-// const User = require("../models/User")
+// const User = require("../Models/User")
 // var emailKeys = require('./../routes/api/other/Email/emailKeys')
 // var welcomeEmail = require('./../routes/api/other/Email/welcomeEmailTemp')
 

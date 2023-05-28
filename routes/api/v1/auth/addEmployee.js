@@ -4,8 +4,8 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 // Load AddEmployee Model
-const AddEmployee = require("../../../../models/User");
-const User = require("../../../../models/User");
+const AddEmployee = require("../../../../Models/User");
+
 
 // @type    POST
 // @route   /api/v1/addition/addemployee

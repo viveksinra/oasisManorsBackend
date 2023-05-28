@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jsonwt = require("jsonwebtoken");
 const key = require("../../../../setup/myurl");
 const jwt_decode = require("jwt-decode");
-const User = require("../../../../models/User")
+const User = require("../../../../Models/User")
 
 // @type    POST
 //@route    /api/v1/auth/passwordAuth/login
