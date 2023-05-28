@@ -98,7 +98,7 @@ async function sendLoginData(req,res,user){
         message: "login success",
         variant: "success",
        
-        userImage: user.userImage,
+        userImage: user.userImage || "https://mui.com/static/images/avatar/2.jpg",
         designation: user.designation ,
         name: user.name
       }
