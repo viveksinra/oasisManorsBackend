@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURL: "mongodb+srv://vivek:vivek123@cluster0.sknfi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  mongoURL: "mongodb+srv://Vivek:Vivek123@cluster0.4beo4s6.mongodb.net/?retryWrites=true&w=majority",
   secret: "mystrongsecret",   
 };

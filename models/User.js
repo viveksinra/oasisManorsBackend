@@ -3,69 +3,88 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   
-  name: {
-    type: String,
-    default:""
-  },
-  emailId: {
-    type: String,
-    default:""
-  },
-  emailVerified:{
-    type:Boolean,
-    default: false
-  },
-
-  password: {
-    type: String,
-    default:"createYourPassword"
-  },
-  
-  mobileNo: {
-    type: String,
-    required:true
-  },
-  mobileVerified:{
-    type:Boolean,
-    default:false
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "myUser",
+    // required:true
   },
   userName: {
     type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    default: ""
+  },
+  mobileNumber: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
     default:""
   },
-  // distributor
+  aadharCardNumber: {
+    type: String,
+    default: ""
+  },
+  panCardNumber: {
+    type: String,
+    default: ""
+  },
+  dateOfBirth: {
+    type: Date,
+  },
+  occupation: {
+    type: String,
+    default: ""
+  },
+  gender: {
+    type: String,
+    enum: ["Male", "Female", "Other"],
+    default: "Other"
+  },
+  nationality: {
+    type: String,
+    default: ""
+  },
+  maritalStatus: {
+    type: String,
+    enum: ["Single", "Married", "Divorced", "Widowed"],
+    default: "Single"
+  },
+  emergencyContact: {
+    name: {
+      type: String,
+      default: ""
+    },
+    mobileNumber: {
+      type: String,
+      default: ""
+    }
+  },
   designation: {
     type: String,
-    default: "user"
+    enum: ["customer", "admin", "collector"],
+    default: "customer"
   },
-  userImage: {
-    type: String,
-    default:""
-  },
-
-language:{
-  type:String,
-  default:"english"
-},
-////
-
-gender: {
-  type: String,
-  default:""
-},
+  // Add more fields as needed
 
   date: {
     type: Date,
     default: Date.now
-  },
-  value: {
-    type: String,
-    default:"createYourPassword"
-  },
+  }
 });
 
 module.exports = User = mongoose.model("myUser", UserSchema);
-
 
 
 
