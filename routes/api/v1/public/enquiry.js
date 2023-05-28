@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
           })
     } 
     else {
-
+// console.log(req.body)
   const newEnquiry = new Enquiry({
     name: req.body.name,
     email: req.body.email,
@@ -32,7 +32,19 @@ router.post("/", (req, res) => {
   newEnquiry.state.id = req.body.state.id;
   newEnquiry.state.label = req.body.state.label;
 
-
+Enquiry.findOne({
+  name: req.body.name,
+  email: req.body.email,
+  mobile: req.body.mobile,
+  address: req.body.address,
+  city: req.body.city,
+  zip: req.body.zip,
+  enquiryFor: req.body.enquiryFor,
+  marketing: req.body.marketing,
+  message: req.body.message
+})
+.then(data => {
+  if(!data){
   newEnquiry
     .save()
     .then(() =>  res.json({
@@ -40,6 +52,14 @@ router.post("/", (req, res) => {
         variant: "success"
       }))
     .catch(err => console.log(err));
+}else{
+  res.json({
+    message: "Duplicate Request",
+    variant: "error"
+  })
+}})
+.catch(err => console.log(err))
+
 }
 });
 
