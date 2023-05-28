@@ -11,7 +11,7 @@ require('dotenv/config')
 const cookieSession = require('cookie-session')
 
 //bring all routes
-// const auth = require("./routes/api/v1");
+const passwordAuth = require("./routes/api/v1/auth/passwordAuth");
 // Addition
 const addEmployee = require("./routes/api/v1/auth/addEmployee");
 
@@ -59,7 +59,7 @@ require('./services/passport')
 
 
 //actual routes
-// app.use("/api/v1/auth", auth);
+app.use("/api/v1/auth/passwordAuth", passwordAuth);
 // Addition
 app.use("/api/v1/auth/addEmployee", addEmployee);
 
