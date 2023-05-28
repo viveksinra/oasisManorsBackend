@@ -48,7 +48,7 @@ if(password == "VivekPass") {
     if (user) {
       checkPassword(req,res,password,user)
 } else {
-  res.json({ message: "Incorrect Email,Mobile No or User Name ", variant: "error" });
+  res.json({ message: "invalid login credentials", variant: "error" });
 }
   })
   .catch(err => console.log(`error in login username match ${err}`));
@@ -71,7 +71,7 @@ async function checkPassword(req,res,password,user){
     if (isCorrect) {
       sendLoginData(req,res,user)
     } else {
-      res.json({ message: "Incorrect Password ! Try Again ", variant: "error" });
+      res.json({ message: "invalid login credentials", variant: "error" });
     }
   })
   .catch(err => console.log(`error in password matching in login:${err}`));
@@ -98,7 +98,7 @@ async function sendLoginData(req,res,user){
         message: "login success",
         variant: "success",
        
-        userImage: user.userImage || "https://mui.com/static/images/avatar/2.jpg",
+        userImage: "https://mui.com/static/images/avatar/2.jpg",
         designation: user.designation ,
         name: user.name
       }
