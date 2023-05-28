@@ -23,8 +23,15 @@ const EnquirySchema = new Schema({
     default:""
   },
   state: {
-    type: String,
-    default:""
+    id:{
+      type: String,
+      default:""
+    },
+    label:{
+      type: String,
+      default:""
+    }
+   
   },
   zip: {
     type: String,

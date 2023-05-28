@@ -23,12 +23,15 @@ router.post("/", (req, res) => {
     mobile: req.body.mobile,
     address: req.body.address,
     city: req.body.city,
-    state: req.body.state,
+    state: {},
     zip: req.body.zip,
     enquiryFor: req.body.enquiryFor,
     marketing: req.body.marketing,
     message: req.body.message
   });
+  newEnquiry.state.id = req.body.state.id;
+  newEnquiry.state.label = req.body.state.label;
+
 
   newEnquiry
     .save()
