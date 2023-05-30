@@ -77,7 +77,17 @@ const UserSchema = new Schema({
     default: "customer"
   },
   // Add more fields as needed
-
+  // comman data required in every Model
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "myUser",
+    required: true
+  },
+  company: {
+    type: Schema.Types.ObjectId,
+    ref: "myCompany",
+    default: "647644e05117173d58993882"
+  },
   date: {
     type: Date,
     default: Date.now

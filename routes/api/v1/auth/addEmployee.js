@@ -12,9 +12,9 @@ const AddEmployee = require("../../../../Models/User");
 // @desc    Create a new employee
 // @access  Public
 router.post("/", 
-// passport.authenticate("jwt", { session: false }), 
+passport.authenticate("jwt", { session: false }), 
 async (req, res) => {
-  var des = "admin";
+  var des = req.user.designation;
   var des1 = "admin";
   var des2 = "manager";
 
@@ -28,6 +28,7 @@ async (req, res) => {
     }
 
     const newEmployee = new User({
+      user:req.user.id,
       name: req.body.name,
       email: req.body.email,
       mobileNumber: req.body.mobileNumber,

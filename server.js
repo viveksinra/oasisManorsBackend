@@ -12,6 +12,8 @@ const cookieSession = require('cookie-session')
 
 //bring all routes
 const passwordAuth = require("./routes/api/v1/auth/passwordAuth");
+const company = require("./routes/api/v1/company");
+const community = require("./routes/api/v1/main/community");
 // Addition
 const addEmployee = require("./routes/api/v1/auth/addEmployee");
 const enquiry = require("./routes/api/v1/public/enquiry");
@@ -61,6 +63,8 @@ require('./services/passport')
 
 //actual routes
 app.use("/api/v1/auth/passwordAuth", passwordAuth);
+app.use("/api/v1/company", company);
+app.use("/api/v1/main/community", community);
 // Addition
 app.use("/api/v1/auth/addEmployee", addEmployee);
 app.use("/api/v1/public/enquiry", enquiry);
