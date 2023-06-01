@@ -17,7 +17,8 @@ const community = require("./routes/api/v1/main/community");
 // Addition
 const addEmployee = require("./routes/api/v1/auth/addEmployee");
 const enquiry = require("./routes/api/v1/public/enquiry");
-
+// Enquiry
+const prospect = require("./routes/api/v1/enquiry/prospect");
 
 //passport 
 // const passport = require("./services/passport")
@@ -68,12 +69,8 @@ app.use("/api/v1/main/community", community);
 // Addition
 app.use("/api/v1/auth/addEmployee", addEmployee);
 app.use("/api/v1/public/enquiry", enquiry);
-
-
-
-
-
-
+// Enquiry
+app.use("/api/v1/enquiry/prospect", prospect);
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"), function(

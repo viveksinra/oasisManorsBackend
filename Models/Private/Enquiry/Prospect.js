@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const ProspectSchema = new Schema({
   community: {
     type: String,
-    required: true
+    default: "647654545893b52b5c8bbc61"
   },
   inquiryDate: {
     type: Date,
-    required: true
+    default: Date.now
   },
   financialMoveInDate: {
     type: Date
@@ -34,20 +34,32 @@ const ProspectSchema = new Schema({
   prospectSource: {
     type: String
   },
-  contactInformation: {
-    contactType: {
-      type: String
-    },
-    organizationName: {
-      type: String
-    },
-    firstName: {
-      type: String
-    },
-    lastName: {
-      type: String
-    },
-    streetAddress: {
+
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  nickname: {
+    type: String
+  },
+  dateOfBirth: {
+    type: Date
+  },
+  gender: {
+    type: String
+  },
+  productType: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
+  email: {
+    type: String
+  },
+  streetAddress: {
       type: String
     },
     unit: {
@@ -62,63 +74,6 @@ const ProspectSchema = new Schema({
     zipCode: {
       type: String
     },
-    homeNumber: {
-      type: String
-    },
-    officeNumber: {
-      type: String
-    },
-    mobileNumber: {
-      type: String
-    },
-    faxNumber: {
-      type: String
-    },
-    email: {
-      type: String
-    }
-  },
-  prospectInformation: {
-    firstName: {
-      type: String
-    },
-    lastName: {
-      type: String
-    },
-    nickname: {
-      type: String
-    },
-    dateOfBirth: {
-      type: Date
-    },
-    gender: {
-      type: String
-    },
-    productType: {
-      type: String
-    },
-    phone: {
-      type: String
-    },
-    email: {
-      type: String
-    },
-    streetAddress: {
-        type: String
-      },
-      unit: {
-        type: String
-      },
-      city: {
-        type: String
-      },
-      state: {
-        type: String
-      },
-      zipCode: {
-        type: String
-      }
-  },
 // comman data required in every Model
 user: {
   type: Schema.Types.ObjectId,

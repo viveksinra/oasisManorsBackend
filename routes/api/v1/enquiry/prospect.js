@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // Load Prospect Model
-const Prospect = require("../../../models/Prospect");
+const Prospect = require("../../../../Models/Private/Enquiry/Prospect");
 
 // @type    POST
 // @route   /api/prospect/
@@ -15,32 +15,78 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const prospectValues = {
-      // Set the values for the prospect object from the request body
-      community: req.body.community,
-      inquiryDate: req.body.inquiryDate,
-      financialMoveInDate: req.body.financialMoveInDate,
-      physicalMoveInDate: req.body.physicalMoveInDate,
-      salesAgent: req.body.salesAgent,
-      prospectStage: req.body.prospectStage,
-      needsAssessment: req.body.needsAssessment,
-      prospectScore: req.body.prospectScore,
-      marketingStatus: req.body.marketingStatus,
-      prospectSource: req.body.prospectSource,
-      contactInformation: req.body.contactInformation,
-      prospectInformation: req.body.prospectInformation,
-      user: req.user.id, // Set the user reference to the current authenticated user
-    };
 
+    };
+    prospectValues.user = req.user.id;
+    if (req.body.community) prospectValues.community = req.body.community;
+    if (req.body.inquiryDate) prospectValues.inquiryDate = req.body.inquiryDate;
+    if (req.body.financialMoveInDate) prospectValues.financialMoveInDate = req.body.financialMoveInDate;
+    if (req.body.physicalMoveInDate) prospectValues.physicalMoveInDate = req.body.physicalMoveInDate;
+    if (req.body.salesAgent) prospectValues.salesAgent = req.body.salesAgent;
+    if (req.body.prospectStage) prospectValues.prospectStage = req.body.prospectStage;
+    if (req.body.needsAssessment) prospectValues.needsAssessment = req.body.needsAssessment;
+    if (req.body.prospectScore) prospectValues.prospectScore = req.body.prospectScore;
+    if (req.body.marketingStatus) prospectValues.marketingStatus = req.body.marketingStatus;
+    if (req.body.prospectSource) prospectValues.prospectSource = req.body.prospectSource;
+
+    if (req.body.firstName) {
+      prospectValues.firstName = req.body.firstName;
+    }
+    if (req.body.lastName) {
+      prospectValues.lastName = req.body.lastName;
+    }
+    if (req.body.nickname) {
+      prospectValues.nickname = req.body.nickname;
+    }
+    if (req.body.dateOfBirth) {
+      prospectValues.dateOfBirth = req.body.dateOfBirth;
+    }
+    if (req.body.gender) {
+      prospectValues.gender = req.body.gender;
+    }
+    if (req.body.productType) {
+      prospectValues.productType = req.body.productType;
+    }
+    if (req.body.phone) {
+      prospectValues.phone = req.body.phone;
+    }
+    if (req.body.email) {
+      prospectValues.email = req.body.email;
+    }
+    if (req.body.streetAddress) {
+      prospectValues.streetAddress = req.body.streetAddress;
+    }
+    if (req.body.unit) {
+      prospectValues.unit = req.body.unit;
+    }
+    if (req.body.city) {
+      prospectValues.city = req.body.city;
+    }
+    if (req.body.state) {
+      prospectValues.state = req.body.state;
+    }
+    if (req.body.zipCode) {
+      prospectValues.zipCode = req.body.zipCode;
+    }
+        
     // Create a new Prospect using the prospectValues
     const newProspect = new Prospect(prospectValues);
-
+if(!req.body.firstName){
+  res.status(401).json({
+    message: "first name is mandatory", 
+    variant:"error" })
+}else{
     // Save the new prospect to the database
     newProspect
       .save()
       .then((prospect) =>
-        res.json({ message: "Prospect saved successfully", prospect })
+        res.status(200).json({
+           message: "Prospect saved successfully", 
+           variant:"success" })
       )
       .catch((err) => console.log(err));
+}
+
   }
 );
 
@@ -129,7 +175,7 @@ passport.authenticate("jwt", { session: false }),
       prospect.marketingStatus = req.body.marketingStatus;
       prospect.prospectSource = req.body.prospectSource;
       prospect.contactInformation = req.body.contactInformation;
-      prospect.prospectInformation = req.body.prospectInformation;
+      prospect = req.body;
 
       // Save the updated prospect to the database
       prospect
