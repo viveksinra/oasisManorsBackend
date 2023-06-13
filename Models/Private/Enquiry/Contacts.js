@@ -28,23 +28,23 @@ const ContactSchema = new Schema({
   },
   lastName: {
     type: String,
-    required: true
+    default:""
   },
   organization: {
     type: String,
-    required: true
+    default:""
   },
   website: {
     type: String,
-    required: true
+    default:""
   },
   priority: {
     type: String,
-    required: true
+    default:""
   },
   contactPreference: {
     type: String,
-    required: true
+    default:""
   },
   isMainContact: {
     type: Boolean,
@@ -52,56 +52,68 @@ const ContactSchema = new Schema({
   },
   notes: {
     type: String,
-    required: true
+    default:""
   },
-  street1: {
+  streetAddress: {
     type: String,
-    required: true
+    default:""
   },
   unit: {
     type: String,
-    required: true
+    default:""
   },
   city: {
     type: String,
-    required: true
+    default:""
   },
   state: {
     type: String,
-    required: true
+    default:""
   },
   zipCode: {
     type: String,
-    required: true
+    default:""
   },
   officePhone: {
     type: String,
-    required: true
+    default:""
   },
   homePhone: {
     type: String,
-    required: true
+    default:""
   },
   mobilePhone: {
     type: String,
-    required: true
+    default:""
   },
   fax: {
     type: String,
-    required: true
+    default:""
   },
   emailAddress: {
     type: String,
-    required: true
+    default:""
   },
   alternateEmailAddress: {
     type: String,
-    required: true
+    default:""
   },
   additionalInformation: {
     type: [String],
     default: []
-  }
+  },
+  isCommunityContact:{
+    type: Boolean,
+    default: false
+  },
+  contactOf:[
+    {
+      prospectId:{
+        type: Schema.Types.ObjectId,
+       ref: "allEthnicity",
+      }
+    }
+  ]
 });
 
 const Contact = mongoose.model("myContact", ContactSchema);
