@@ -27,11 +27,11 @@ const ProspectSchema = new Schema({
    
       label: {
         type: String,
-        required: true
+        default:""
       },
       id: {
         type: String,
-        required: true
+        default:""
       }
    
   },
@@ -39,11 +39,11 @@ const ProspectSchema = new Schema({
  
       label: {
         type: String,
-        required: true
+        default:""
       },
       id: {
         type: String,
-        required: true
+        default:""
       }
   
   },
@@ -54,11 +54,11 @@ const ProspectSchema = new Schema({
   prospectSource: {    
       label: {
         type: String,
-        required: true
+        default: ""
       },
       id: {
         type: String,
-        required: true
+        default: ""
       }   
   },
   firstName: {
@@ -73,11 +73,11 @@ const ProspectSchema = new Schema({
   gender: {   
       label: {
         type: String,
-        required: true
+        default: ""
       },
       id: {
         type: String,
-        required: true
+        default: ""
       }    
   },
   phone: {
@@ -98,11 +98,11 @@ const ProspectSchema = new Schema({
   state: {
          label: {
         type: String,
-        required: true
+        default: ""
       },
       id: {
         type: String,
-        required: true
+        default: ""
       }    
   },
   zipCode: {

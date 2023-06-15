@@ -1,59 +1,48 @@
 const validateOnCreate = async (req, res, next) => {
 
-
+console.log(req.body.salesAgent)
   // Check if the required fields are present
-  if (!req.body.salesAgent && !req.body.salesAgent.label && !req.body.salesAgent.id) {
+  if (!req.body.salesAgent || !req.body.salesAgent.label || !req.body.salesAgent.id) {
     return res.status(400).json({
       message: "Sales Agent are required fields.",
       variant: "error",
     });
   }
-  // // Check if the username is already taken
+  // // Check if it is duplicate entry
 
-  //   const existingUser = await User.findOne({
-  //     name:req.body.name,
-  //     mobileNumber:req.body.mobileNumber,
-  //     amountFinanced:req.body.amountFinanced,
-  //     emiAmount:req.body.emiAmount,
-  //     totalEmi:req.body.totalEmi,
-  //     interestRate:req.body.interestRate,
-  //     installmentEndOn:req.body.installmentEndOn
-  //   });
+    const existingProspect = await Prospect.findOne({
+      marketingStatus:req.body.marketingStatus,
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
+      dateOfBirth:req.body.dateOfBirth,
+      phone:req.body.phone,
+      email:req.body.email,
+      streetAddress:req.body.streetAddress,
+      unit:req.body.unit,
+      city:req.body.city,
+      zipCode:req.body.zipCode,
 
-  //   if (existingUser) {
-  //     return res.status(400).json({
-  //       message:"Seems to Duplicate Entry Please Check",
-  //       variant: "error",
-  //     });
-  //   }
+    });
+
+    if (existingProspect) {
+      return res.status(400).json({
+        message:"Seems to Duplicate Entry Please Check",
+        variant: "error",
+      });
+    }
   
   next();
 };
 
 const validateOnUpdate = async (req, res, next) => {
- let LoanData = await Loan.findOne({_id: req.params.id})
-    .then(data => {
-      if(data){
-          if(data.loanStatus == "approved"){
-            return res.status(400).json({
-              message:"Loan is already approved can't update",
-              variant: "error",
-            });
-          }
-      }else{
-        return res.status(400).json({
-          message:"Update Id didn't matched",
-          variant: "error",
-        });
-      }
-    })
-    .catch(err => {console.log(err); 
-      return res.status(400).json({
-        message:"Issue in Validation",
-        variant: "error",
-      });}
-    )
 
+  // Check if the required fields are present
+  if (!req.body.salesAgent || !req.body.salesAgent.label || !req.body.salesAgent.id) {
+    return res.status(400).json({
+      message: "Sales Agent are required fields.",
+      variant: "error",
+    });
+  }
     
   next();
 };

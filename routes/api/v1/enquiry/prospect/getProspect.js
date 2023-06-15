@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const { designations } = require("../../../../utils");
+
 // @type    GET
 // @route   /api/v1/loan/getLoan/:id
 // @desc    Get a loan by ID
@@ -10,14 +11,7 @@ router.get(
     "/getOne/:id",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-        var des = req.user.designation;
-  
-        if (!designations.includes(des)) {
-          return res.status(401).json({
-            message: "You are not authorized.",
-            variant: "error",
-          });
-        }
+
       try {
         const loan = await Loan.findById(req.params.id);
   
@@ -28,7 +22,7 @@ router.get(
         }
         res.status(200).json({ variant: "success", data: loan });
       } catch (error) {
-  console.log(error)
+        console.log(error)
         res
           .status(500)
           .json({ variant: "error", message: "Internal server error" });
@@ -44,19 +38,11 @@ router.get(
     "/getAll/:type",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      try {
-        var des = req.user.designation;
-  
-        if (!designations.includes(des)) {
-          return res.status(401).json({
-            message: "You are not authorized.",
-            variant: "error",
-          });
-        }
-        const data = await Loan.find({ loanStatus: req.params.type });
+      try {    
+        const data = await Loan.find({});
         res.status(200).json({ variant: "success", data });
       } catch (error) {
-  console.log(error)
+        console.log(error)
         res.status(500).json({
           variant: "error",
           message: "Internal server error" + error.message,
@@ -122,24 +108,14 @@ router.get(
     "/getall/:type/:searchLoan",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      try {
-        var des = req.user.designation;
-  
-        if (!designations.includes(des)) {
-          return res.status(401).json({
-            message: "You are not authorized.",
-            variant: "error",
-          });
-        }
-        const search = req.params.searchLoan;
-  
+      try {       
+        const search = req.params.searchLoan; 
         
           const user = await Loan.find({
-            loanStatus: req.params.type,
             $or: [
-              { name: new RegExp(search, "i") },
-              { mobileNumber: new RegExp(search, "i") },
-              { loanNo: new RegExp(search, "i") },        
+              { firstName: new RegExp(search, "i") },
+              { lastName: new RegExp(search, "i") },
+              { phone: new RegExp(search, "i") },        
             ]
           });
           res.status(200).json({ variant: "success", data: user });
