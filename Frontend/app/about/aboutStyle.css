@@ -1,0 +1,31 @@
+#heroAbout{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/2.1_CAN_hero-2048x471.jpg");
+    background-size: cover;	
+    /* object-fit: cover; */
+    background-repeat: no-repeat;
+    height: 500px;
+    width: 100%;
+}
+ #heroAbout:after{
+    content: "";
+    background-image: url("https://www.ecsforseniors.org/wp-content/themes/3fo_gutenberg_base/images/ECS_Banner-texture.svg");
+    height: 126px;
+    width: calc(100% + 1px);
+    display: block;
+    position: relative;
+    bottom: -90%;
+    left: 0px;
+
+} 
+
+/* Mobile */
+ @media only screen and (max-width: 580px) {
+    #heroAbout {
+      max-width:100% ;
+      height: 300px;
+      background-position: 60% 60%;
+    }
+    #heroAbout:after{
+        display: none;
+      }
+  }

@@ -1,13 +1,21 @@
+const Prospect = require("../Models/Private/Enquiry/Prospect");
+
 const validateOnCreate = async (req, res, next) => {
 
-console.log(req.body.salesAgent)
   // Check if the required fields are present
-  if (!req.body.salesAgent || !req.body.salesAgent.label || !req.body.salesAgent.id) {
-    return res.status(400).json({
+  if (!req.body.salesAgent ) {
+    return res.status(406).json({
       message: "Sales Agent are required fields.",
       variant: "error",
     });
-  }
+  
+  }else if (!req.body.salesAgent.label || !req.body.salesAgent.id) {
+      return res.status(406).json({
+        message: "Sales Agent are required fields.",
+        variant: "error",
+      });
+    }
+  
   // // Check if it is duplicate entry
 
     const existingProspect = await Prospect.findOne({
@@ -25,7 +33,7 @@ console.log(req.body.salesAgent)
     });
 
     if (existingProspect) {
-      return res.status(400).json({
+      return res.status(406).json({
         message:"Seems to Duplicate Entry Please Check",
         variant: "error",
       });
@@ -37,12 +45,12 @@ console.log(req.body.salesAgent)
 const validateOnUpdate = async (req, res, next) => {
 
   // Check if the required fields are present
-  if (!req.body.salesAgent || !req.body.salesAgent.label || !req.body.salesAgent.id) {
-    return res.status(400).json({
-      message: "Sales Agent are required fields.",
-      variant: "error",
-    });
-  }
+  // if (!req.body.salesAgent || !req.body.salesAgent.label || !req.body.salesAgent.id) {
+  //   return res.status(406).json({
+  //     message: "Sales Agent are required fields.",
+  //     variant: "error",
+  //   });
+  // }
     
   next();
 };

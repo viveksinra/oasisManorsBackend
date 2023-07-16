@@ -1,0 +1,93 @@
+.residentCard{
+    box-shadow : rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border-radius: 10px;
+    max-width: 100%;
+    height: 220px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.activeCard{
+    border: 1px solid greenyellow;
+    background: linear-gradient(45deg,#e3f5da 17%,#e9f3ee 70%) !important;
+}
+.residentImg {
+    background-size: cover;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    top: -15px;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.cross {
+    left: -14px;
+    top: 8px;
+    font-size: 10px;
+    line-height: 1.5;
+    text-align: center;
+    width: 6em;
+    position: relative;
+    letter-spacing: 1;
+    z-index:  20;
+    transform: rotate(-45deg);
+    color: #fff;
+    background: linear-gradient(45deg,#72d042 17%,#25cc71 70%);
+}
+#moreCard {
+    border: 1px solid greenyellow;
+    width: 100%;
+    min-height: 600px;
+    border-radius: 12px; 
+    position: relative;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    top: 40px;
+    box-shadow : rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(174, 174, 212, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.2) 0px 30px 60px -30px;
+}
+#moreImg {
+    width: 120px;
+    height: 120px;
+    margin-top: 10px;
+    align-self: center;
+    border: 1px solid greenyellow;
+}
+
+.dialogImg{
+    background-size: cover;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.medCard{
+    width: 400px;
+    height: 250px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: -5px 5px 5px -5px #333;
+    border-right: 1px solid #8cdd8e;
+}
+.cardTop{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 0px 10px;
+    display :flex;
+    justify-content:space-between;
+    background-color: #4caf50;
+    color: #fff;
+}
+.cardBottom{
+    display :flex;
+    justify-content:space-between;
+    background-color: #e1fde2;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    padding: 5px 10px;
+}

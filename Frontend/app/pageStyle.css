@@ -1,0 +1,64 @@
+#topAbstract{
+  background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2022/11/abstract_gradient.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 10px;  
+}
+#heroBack{
+    background-image: url("https://www.ecsforseniors.org/cdn-cgi/image/format=auto/wp-content/uploads/2023/03/hero_confidence-3-1536x672.jpg");
+    width: 100%;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#heroBack:after{
+  content: '';
+  background-image: url("https://www.ecsforseniors.org/wp-content/themes/3fo_gutenberg_base/images/ECS_Banner-texture.svg");
+  height: 126px;
+  width: 100%;
+  display: block;
+  position: absolute;
+  bottom: -12px;
+  z-index: 4;
+}
+#availability{
+  height: 112px;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  padding: 0px 20px;
+}
+#availability input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+
+  
+/* Mobile */
+@media (max-width: 700px) {
+  #heroBack {
+    height: 400px;
+  }
+  #heroBack:after{
+    display: none;
+  }
+  #topAbstract{
+    max-width: 420px;
+  }
+  #availability{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 180px;
+  }
+}

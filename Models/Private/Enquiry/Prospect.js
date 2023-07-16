@@ -23,28 +23,24 @@ const ProspectSchema = new Schema({
       }
     
   },
-  prospectStage: {
-   
+  prospectStage: {  
       label: {
         type: String,
-        default:""
+        required: true
       },
       id: {
         type: String,
-        default:""
-      }
-   
+        required: true
+      }    
+  },
+  residenceStage:{
+    type:String,
+    enum:["prospect","residence","incoming","movedOut"],
+    default:"prospect"
   },
   prospectScore: {
- 
-      label: {
-        type: String,
-        default:""
-      },
-      id: {
-        type: String,
-        default:""
-      }
+    type: Number,
+    default:null
   
   },
   marketingStatus: {
@@ -60,6 +56,9 @@ const ProspectSchema = new Schema({
         type: String,
         default: ""
       }   
+  },
+  userImage: {
+    type: String
   },
   firstName: {
     type: String
@@ -86,10 +85,19 @@ const ProspectSchema = new Schema({
   email: {
     type: String
   },
+  message: {
+    type: String
+  },
   streetAddress: {
     type: String
   },
   unit: {
+    type: String
+  },
+  home: {
+    type: String
+  },
+  office: {
     type: String
   },
   city: {
@@ -112,6 +120,61 @@ const ProspectSchema = new Schema({
     type: Boolean,
     default: false
   },
+  password:{
+    type: String,
+    default: ""
+  },
+  value:{
+    type: String,
+    default: ""
+  },
+  isResidence: {
+    type: Boolean,
+    default: false
+  },
+  isMovedOut: {
+    type: Boolean,
+    default: false
+  },
+  building: {
+    label: {
+     type: String,
+ },
+    id: {
+     type: String,
+ },
+ 
+   },
+   floor: {
+     label: {
+         type: String,
+         default: ""
+     },
+        id: {
+         type: String,
+         default: ""
+     },
+   },
+   room: {
+     label: {
+         type: String,
+         default: ""
+     },
+        id: {
+         type: String,
+         default: ""
+     },
+   },
+   seat: {
+     label: {
+         type: String,
+         default: ""
+     },
+        id: {
+         type: String,
+         default: ""
+     },
+   },
   // Default for all
   community: {
     type: String,

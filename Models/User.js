@@ -3,78 +3,110 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "myUser",
-    // required:true
-  },
   userName: {
     type: String,
     required: true
   },
-  name: {
+  userImage: {
     type: String,
-    required: true
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+    
   },
   email: {
     type: String,
     default: ""
   },
-  mobileNumber: {
+  mobile: {
     type: String,
-    required: true
+    default: ""
   },
   password: {
     type: String,
     required: true
   },
-  address: {
+  value: {
     type: String,
-    default:""
   },
-  aadharCardNumber: {
-    type: String,
-    default: ""
-  },
-  panCardNumber: {
-    type: String,
-    default: ""
-  },
-  dateOfBirth: {
+  dob: {
     type: Date,
   },
-  occupation: {
-    type: String,
-    default: ""
+  hireDate: {
+    type: Date,
   },
+
   gender: {
-    type: String,
-    enum: ["Male", "Female", "Other"],
-    default: "Other"
-  },
-  nationality: {
-    type: String,
-    default: ""
-  },
-  maritalStatus: {
-    type: String,
-    enum: ["Single", "Married", "Divorced", "Widowed"],
-    default: "Single"
-  },
-  emergencyContact: {
-    name: {
+    label:{
       type: String,
-      default: ""
     },
-    mobileNumber: {
+    id:{
       type: String,
-      default: ""
-    }
+    }  
   },
+  jobRole: {
+    label:{
+      type: String,
+    },
+    id:{
+      type: String,
+    }    
+  },
+  status: {
+    label:{
+      type: String,
+    },
+    id:{
+      type: String,
+    }    
+  },
+  loginAllowed:{
+    type:Boolean,
+    default:false
+  },
+  securityRole: [{
+    label:{
+      type: String,
+      enum:["Administrator", "Care Taker", "Medical", "Staff", "Account", "Enquiry", "Manager"]
+    },
+    id:{
+      type: String,
+      enum:["administrator", "careTaker", "medical", "staff", "account", "enquiry", "manager"]
+    }  
+}]
+,
+
   designation: {
     type: String,
-    enum: ["customer", "admin", "collector"],
+    enum: ["customer", "admin","employee" ],
     default: "customer"
+  },
+  salary: {
+    type: Number,
+    default: 0
+  },
+  street: {
+    type: String,
+  },
+  unit: {
+    type: String,
+  },
+  zip: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  state: {
+    label:{
+      type: String,
+    },
+    id:{
+      type: String,
+    }    
   },
   // Add more fields as needed
   // comman data required in every Model
@@ -83,10 +115,19 @@ const UserSchema = new Schema({
     ref: "myUser",
     required: true
   },
+    // Default for all
+    community: [{
+      type: String,
+      default: "647654545893b52b5c8bbc61"
+    }],
   company: {
     type: Schema.Types.ObjectId,
     ref: "myCompany",
     default: "647644e05117173d58993882"
+  },
+  lastModified: {
+    type: Date,
+    default: Date.now
   },
   date: {
     type: Date,

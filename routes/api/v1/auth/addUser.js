@@ -26,7 +26,6 @@ async (req, res) => {
         variant: "error"
       });
     }
-
     const newEmployee = new User({
       user:req.user.id,
       name: req.body.name,
@@ -42,8 +41,6 @@ async (req, res) => {
  //make value
 var val1 = req.body.password
 newEmployee.value = right_three(val1)
-
-
      // Encrypt Password using bcrypt
      bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newEmployee.password, salt, (err, hash) => {
@@ -55,8 +52,7 @@ newEmployee.value = right_three(val1)
               res.json({
                 message: "Congratulation ! Your Account is Successfully Created ",
                 variant: "success"
-              })
-              
+              })              
             )
             .catch(err =>
               res.status(404).json(

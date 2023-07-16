@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
   let { companyName, companyLink } = req.body;
   // Check if companyName is present
   if (!companyName) {
-    return res.status(400).json({ error: "companyName is required" });
+    return res.status(406).json({ error: "companyName is required" });
   }
   // Remove spaces from companyLink if it exists
   if (companyLink) {

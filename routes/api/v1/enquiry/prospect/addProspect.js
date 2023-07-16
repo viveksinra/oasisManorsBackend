@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 // Load Prospect Model
 const Prospect = require("../../../../../Models/Private/Enquiry/Prospect");
@@ -11,7 +12,7 @@ const {
 
 // @type    POST
 // @route   /api/v1/prospect/prospectRequest/addProspect
-// @desc    Create a new customer
+// @desc    Create a new prospect
 // @access  Public
 router.post(
   "/",
@@ -23,7 +24,7 @@ router.post(
       await new Prospect(prospectObj)
       .save();
       res.status(201).json({
-        message: "Customer Successfully added",
+        message: "Prospect Successfully added",
         variant: "success",
       });
     } catch (error) {
@@ -39,21 +40,20 @@ console.log(error)
 
 // @type    PUT
 // @route   /api/v1/prospect/prospectRequest/addProspect/:id
-// @desc    Update a customer by ID
+// @desc    Update a prospect by ID
 // @access  Public
 // @type    POST
 
-async function updateMe(req, res, updateCustomer) {
+async function updateMe(req, res, updateProspect) {
   try {
     const prospect = await Prospect.findOneAndUpdate(
       { _id: req.params.id },
-      { $set: updateCustomer },
+      { $set: updateProspect },
       { new: true }
     );
-
     if (!prospect) {
       return res
-        .status(401)
+        .status(406)
         .json({ message: "Id not found", variant: "error" });
     }
     res
@@ -68,12 +68,42 @@ console.log(error)
 }
 
 router.post(
-  "/update/:id",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   validateOnUpdate,
   async (req, res) => {
     try {
-      const prospectObj = getProspectObj(req,"update");
+      const prospectObj = await getProspectObj(req,"update");
+
+      updateMe(req, res, prospectObj);
+    } catch (error) {
+console.log(error)
+      res.status(500).json({
+        variant: "error",
+        message: "Internal server error" + error.message,
+      });
+    }
+  }
+);
+// update password
+// /api/v1/enquiry/prospect/addProspect/password/:id
+router.post(
+  "/password/:id",
+  passport.authenticate("jwt", { session: false }),
+  validateOnUpdate,
+  async (req, res) => {
+    try {
+      const prospectObj = {}
+      if (req.body.password) {
+        // var val1 = req.body.password
+        // newUser.value = right_three(val1)
+        prospectObj.value = req.body.password
+        const password = req.body.password;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        prospectObj.password = hashedPassword;
+      }
+
+      
 
       updateMe(req, res, prospectObj);
     } catch (error) {
@@ -88,23 +118,23 @@ console.log(error)
 
 
 // @type    DELETE
-// @route   /api/v1/customer/addCustomer/:id
-// @desc    Delete a customer by ID
+// @route   /api/v1/prospect/addProspect/:id
+// @desc    Delete a prospect by ID
 // @access  Public
 router.delete(
   "/deleteOne/:id",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const customer = await Prospect.findByIdAndRemove(req.params.id);
-      if (!customer) {
+      const prospect = await Prospect.findByIdAndRemove(req.params.id);
+      if (!prospect) {
         return res
           .status(404)
-          .json({ variant: "error", message: "Customer not found" });
+          .json({ variant: "error", message: "Prospect not found" });
       }
       res
         .status(200)
-        .json({ variant: "success", message: "Customer deleted successfully" });
+        .json({ variant: "success", message: "Prospect deleted successfully" });
     } catch (error) {
 console.log(error)
       res.status(500).json({
@@ -117,16 +147,11 @@ console.log(error)
 
 async function getProspectObj(req,type) {
   let newProspect = {
-     
+   
+
   };
   if(type == "create"){
-     newProspect = {
-      salesAgent:{},
-      prospectStage:{},
-      prospectScore:{},
-      gender:{},
-      state:{}
-    };
+   
   }
   
 
@@ -147,6 +172,7 @@ if (req.body.physicalMoveInDate) {
 }
 
 if (req.body.salesAgent) {
+  newProspect.salesAgent = {};
   if (req.body.salesAgent.label) {
     newProspect.salesAgent.label = req.body.salesAgent.label;
   }
@@ -156,6 +182,7 @@ if (req.body.salesAgent) {
 }
 
 if (req.body.prospectStage) {
+  newProspect.prospectStage = {};
   if (req.body.prospectStage.label) {
     newProspect.prospectStage.label = req.body.prospectStage.label;
   }
@@ -165,12 +192,8 @@ if (req.body.prospectStage) {
 }
 
 if (req.body.prospectScore) {
-  if (req.body.prospectScore.label) {
-    newProspect.prospectScore.label = req.body.prospectScore.label;
-  }
-  if (req.body.prospectScore.id) {
-    newProspect.prospectScore.id = req.body.prospectScore.id;
-  }
+  newProspect.prospectScore = req.body.prospectScore;
+
 }
 
 if (req.body.marketingStatus !== undefined) {
@@ -178,6 +201,7 @@ if (req.body.marketingStatus !== undefined) {
 }
 
 if (req.body.prospectSource) {
+  newProspect.prospectSource = {};
   if (req.body.prospectSource.label) {
     newProspect.prospectSource.label = req.body.prospectSource.label;
   }
@@ -186,6 +210,9 @@ if (req.body.prospectSource) {
   }
 }
 
+if (req.body.userImage) {
+  newProspect.userImage = req.body.userImage;
+}
 if (req.body.firstName) {
   newProspect.firstName = req.body.firstName;
 }
@@ -199,6 +226,7 @@ if (req.body.dateOfBirth) {
 }
 
 if (req.body.gender) {
+  newProspect.gender = {};
   if (req.body.gender.label) {
     newProspect.gender.label = req.body.gender.label;
   }
@@ -214,6 +242,9 @@ if (req.body.phone) {
 if (req.body.email) {
   newProspect.email = req.body.email;
 }
+if (req.body.message) {
+  newProspect.message = req.body.message;
+}
 
 if (req.body.streetAddress) {
   newProspect.streetAddress = req.body.streetAddress;
@@ -226,8 +257,15 @@ if (req.body.unit) {
 if (req.body.city) {
   newProspect.city = req.body.city;
 }
+if (req.body.home) {
+  newProspect.home = req.body.home;
+}
+if (req.body.office) {
+  newProspect.office = req.body.office;
+}
 
 if (req.body.state) {
+  newProspect.state = {};
   if (req.body.state.label) {
     newProspect.state.label = req.body.state.label;
   }

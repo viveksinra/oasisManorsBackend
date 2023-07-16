@@ -23,7 +23,7 @@ router.post(
     let { communityName, communityLink } = req.body;
       // Check if communityName is present
   if (!communityName) {
-    return res.status(400).json({ error: "communityName is required" });
+    return res.status(406).json({ error: "communityName is required" });
   }
   // Remove spaces from communityLink if it exists
   if (communityLink) {
@@ -46,7 +46,7 @@ router.post(
       !communityValues.communityName ||
       !communityValues.communityLink
     ) {
-      return res.status(400).json({
+      return res.status(406).json({
         message: "Company, Community Name, and Community Link are required fields",
         variant: "error",
       });

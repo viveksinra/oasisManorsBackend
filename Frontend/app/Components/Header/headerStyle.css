@@ -1,0 +1,39 @@
+#topData{
+    height: 40px;
+    background-color: #e9f3f6;
+    color: #26b20e;
+}
+.dataBox{
+    display: flex;
+}
+#topHeader{
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#navContainer{
+    display: flex;
+    align-items: center;
+}
+#topHeader ul{
+    list-style: none;
+}
+#topHeader ul li{
+    display: inline-block;
+    padding-right: 30px;
+}
+#topHeader ul li:hover{
+    color: #26b20e;
+}
+#callBackBtn{
+    border: 1px solid #26b20e;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px !important;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #26b20e;
+    margin-right: 20px;
+}
